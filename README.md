@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 
 <p align="center">
-  <img src="./assets/images/kapiwara_banner.png" alt="Banner Kapi'wara" width="1000"/>
+  <img src="./kapiwara_app/assets/images/kapiwara_banner.png" alt="Banner Kapi'wara" width="1000"/>
 </p>
 
 Uma aplicação mobile Flutter moderna usando arquitetura limpa com BLoC e Material Design 3.
