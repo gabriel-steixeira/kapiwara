@@ -105,9 +105,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     ],
                   ),
                 ),
-                
-                //const SizedBox(height: 32),
-                
+                                
                 // Card unificado com os dois idiomas
                 Container(
                   width: double.infinity,
