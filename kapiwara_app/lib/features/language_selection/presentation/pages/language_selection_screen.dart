@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../shared/themes/app_theme.dart';
 import '../../../../shared/widgets/primary_button.dart';
-import '../../../home/presentation/pages/home_page.dart';
+import '../../../name_configuration/presentation/pages/name_configuration_screen.dart';
 import '../widgets/kapiwara_header.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
@@ -20,7 +20,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   
   final List<Map<String, String>> languages = [
     {'name': 'Português', 'code': 'pt'},
-    {'name': 'Tupi', 'code': 'tupi'},
+    {'name': 'Guarani', 'code': 'Guarani'},
   ];
 
   @override
@@ -65,7 +65,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
 
     if (mounted) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const NameConfigurationScreen()),
       );
     }
   }
@@ -81,7 +81,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [                
-                // Título
+                // Título com ícone da capivara
                 Container(
                   width: double.infinity,
                   alignment: Alignment.center,
@@ -105,175 +105,179 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     ],
                   ),
                 ),
-                                
-                // Card unificado com os dois idiomas
-                Container(
-                  width: double.infinity,
-                  height: 118,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppTheme.languageCardBorder,
-                        blurRadius: 0,
-                        offset: const Offset(0, 4),
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
+                
+                // Card unificado com os dois idiomas - posição relativa -20px
+                Transform.translate(
+                  offset: const Offset(0, -50),
                   child: Container(
+                    width: double.infinity,
+                    height: 118,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFBDEB5),
                       borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                        width: 1,
-                        color: AppTheme.languageCardBorder,
-                      ),
-                    ),
-                    child: Stack(
-                      children: [
-                        // Linha divisória
-                        Positioned(
-                          left: 0,
-                          top: 59,
-                          child: Container(
-                            width: 450,
-                            height: 1,
-                            color: AppTheme.languageCardBorder,
-                          ),
-                        ),
-                        
-                        // Português - Primeira opção
-                        Positioned(
-                          left: 20,
-                          top: 20,
-                          child: GestureDetector(
-                            onTap: () => _selectLanguage('pt'),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/language_choose_screen/user_talking.svg',
-                                  width: 24,
-                                  height: 24,
-                                  colorFilter: ColorFilter.mode(
-                                    AppTheme.textPrimary,
-                                    BlendMode.srcIn,
-                                  ),
-                                ),
-                                const SizedBox(width: 20),
-                                Text(
-                                  'Português',
-                                  style: TextStyle(
-                                    color: AppTheme.textPrimary,
-                                    fontSize: 16,
-                                    fontFamily: 'DINNext',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.25,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        
-                        // Radio button Português
-                        Positioned(
-                          left: 400,
-                          top: 20,
-                          child: GestureDetector(
-                            onTap: () => _selectLanguage('pt'),
-                            child: Container(
-                              width: 22,
-                              height: 22,
-                              decoration: BoxDecoration(
-                                color: selectedLanguage == 'pt' 
-                                    ? AppTheme.primaryButton 
-                                    : Colors.white,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  width: 1,
-                                  color: AppTheme.textPrimary,
-                                ),
-                              ),
-                              child: selectedLanguage == 'pt'
-                                  ? const Icon(
-                                      Icons.check,
-                                      size: 14,
-                                      color: Colors.white,
-                                    )
-                                  : null,
-                            ),
-                          ),
-                        ),
-                        
-                        // Tupi - Segunda opção
-                        Positioned(
-                          left: 20,
-                          top: 73,
-                          child: GestureDetector(
-                            onTap: () => _selectLanguage('tupi'),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/language_choose_screen/user_talking.svg',
-                                  width: 24,
-                                  height: 24,
-                                  colorFilter: ColorFilter.mode(
-                                    AppTheme.textPrimary,
-                                    BlendMode.srcIn,
-                                  ),
-                                ),
-                                const SizedBox(width: 20),
-                                Text(
-                                  'Tupi',
-                                  style: TextStyle(
-                                    color: AppTheme.textPrimary,
-                                    fontSize: 16,
-                                    fontFamily: 'DINNext',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.25,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        
-                        // Radio button Tupi
-                        Positioned(
-                          left: 400,
-                          top: 73,
-                          child: GestureDetector(
-                            onTap: () => _selectLanguage('tupi'),
-                            child: Container(
-                              width: 22,
-                              height: 22,
-                              decoration: BoxDecoration(
-                                color: selectedLanguage == 'tupi' 
-                                    ? AppTheme.primaryButton 
-                                    : Colors.white,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  width: 1,
-                                  color: AppTheme.textPrimary,
-                                ),
-                              ),
-                              child: selectedLanguage == 'tupi'
-                                  ? const Icon(
-                                      Icons.check,
-                                      size: 14,
-                                      color: Colors.white,
-                                    )
-                                  : null,
-                            ),
-                          ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppTheme.languageCardBorder,
+                          blurRadius: 0,
+                          offset: const Offset(0, 4),
+                          spreadRadius: 0,
                         ),
                       ],
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFBDEB5),
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(
+                          width: 1,
+                          color: AppTheme.languageCardBorder,
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          // Linha divisória
+                          Positioned(
+                            left: 0,
+                            top: 59,
+                            child: Container(
+                              width: 450,
+                              height: 1,
+                              color: AppTheme.languageCardBorder,
+                            ),
+                          ),
+                          
+                          // Português - Primeira opção
+                          Positioned(
+                            left: 20,
+                            top: 20,
+                            child: GestureDetector(
+                              onTap: () => _selectLanguage('pt'),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/images/language_choose_screen/user_talking.svg',
+                                    width: 24,
+                                    height: 24,
+                                    colorFilter: ColorFilter.mode(
+                                      AppTheme.textPrimary,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Text(
+                                    'Português',
+                                    style: TextStyle(
+                                      color: AppTheme.textPrimary,
+                                      fontSize: 16,
+                                      fontFamily: 'DINNext',
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.25,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          
+                          // Radio button Português
+                          Positioned(
+                            left: 400,
+                            top: 20,
+                            child: GestureDetector(
+                              onTap: () => _selectLanguage('pt'),
+                              child: Container(
+                                width: 22,
+                                height: 22,
+                                decoration: BoxDecoration(
+                                  color: selectedLanguage == 'pt' 
+                                      ? AppTheme.primaryButton 
+                                      : Colors.white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: 1,
+                                    color: AppTheme.textPrimary,
+                                  ),
+                                ),
+                                child: selectedLanguage == 'pt'
+                                    ? const Icon(
+                                        Icons.check,
+                                        size: 14,
+                                        color: Colors.white,
+                                      )
+                                    : null,
+                              ),
+                            ),
+                          ),
+                          
+                          // Guarani - Segunda opção
+                          Positioned(
+                            left: 20,
+                            top: 73,
+                            child: GestureDetector(
+                              onTap: () => _selectLanguage('Guarani'),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/images/language_choose_screen/user_talking.svg',
+                                    width: 24,
+                                    height: 24,
+                                    colorFilter: ColorFilter.mode(
+                                      AppTheme.textPrimary,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Text(
+                                    'Guarani',
+                                    style: TextStyle(
+                                      color: AppTheme.textPrimary,
+                                      fontSize: 16,
+                                      fontFamily: 'DINNext',
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.25,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          
+                          // Radio button Guarani
+                          Positioned(
+                            left: 400,
+                            top: 73,
+                            child: GestureDetector(
+                              onTap: () => _selectLanguage('Guarani'),
+                              child: Container(
+                                width: 22,
+                                height: 22,
+                                decoration: BoxDecoration(
+                                  color: selectedLanguage == 'Guarani' 
+                                      ? AppTheme.primaryButton 
+                                      : Colors.white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: 1,
+                                    color: AppTheme.textPrimary,
+                                  ),
+                                ),
+                                child: selectedLanguage == 'Guarani'
+                                    ? const Icon(
+                                        Icons.check,
+                                        size: 14,
+                                        color: Colors.white,
+                                      )
+                                    : null,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 
-                const SizedBox(height: 40),
+                // Espaçamento ajustado para compensar o offset
+                const SizedBox(height: 20),
                 
                 // Botão confirmar
                 PrimaryButton(

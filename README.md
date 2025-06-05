@@ -100,7 +100,7 @@ O projeto utiliza **Material Design 3** com:
 - ✅ Navegação automática
 
 ### Language Selection
-- ✅ Seleção de idioma (Português/Tupi)
+- ✅ Seleção de idioma (Português/Guarani)
 - ✅ Persistência com SharedPreferences
 - ✅ Componentes reutilizáveis (LanguageCard, PrimaryButton)
 - ✅ Design system consistente

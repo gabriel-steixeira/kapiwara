@@ -75,7 +75,7 @@ final savedLanguage = prefs.getString('selected_language');
 
 Atualmente suportados:
 - **Português** (`pt`)
-- **Tupi** (`tupi`)
+- **Guarani** (`Guarani`)
 
 ## 📁 Estrutura de Arquivos
 

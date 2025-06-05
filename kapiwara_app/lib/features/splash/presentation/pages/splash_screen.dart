@@ -15,16 +15,18 @@ class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
+  late AnimationController _nameFadeController; // Novo controller para o nome na fase 2
   late Animation<double> _fadeAnimation;
+  late Animation<double> _nameFadeAnimation; // Nova animação para o nome na fase 2
   late Animation<Offset> _slideAnimation;
   
-  int _currentPhase = 1; // 1, 2, 3 para as três fases
+  int _currentPhase = 2; // 1, 2, 3 para as três fases
   
   @override
   void initState() {
     super.initState();
     
-    // Controller para fade in/out
+    // Controller para fade in/out da fase 1 e 3
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
@@ -36,12 +38,27 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
     
-    // Animação de fade
+    // Controller separado para fade do nome na fase 2
+    _nameFadeController = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+    
+    // Animação de fade principal
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
     ).animate(CurvedAnimation(
       parent: _fadeController,
+      curve: Curves.easeInOut,
+    ));
+    
+    // Animação de fade para o nome na fase 2
+    _nameFadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _nameFadeController,
       curve: Curves.easeInOut,
     ));
     
@@ -59,20 +76,24 @@ class _SplashScreenState extends State<SplashScreen>
   
   void _startAnimationSequence() async {
     // Fase 1: Mostrar nome "Kapiwara" com fade in
-    await _fadeController.forward();
-    await Future.delayed(const Duration(milliseconds: 1500));
+    // await _fadeController.forward();
+    // await Future.delayed(const Duration(milliseconds: 1500));
     
-    // Transição para fase 2: Fade out do nome
-    await _fadeController.reverse();
-    setState(() {
-      _currentPhase = 2;
-    });
+    // Transição para fase 2: Fade out do nome da fase 1
+    // await _fadeController.reverse();
+    // setState(() {
+    //   _currentPhase = 2;
+    // });
     
-    // Fase 2: Slide up do ícone
-    await _slideController.forward();
+    // Fase 2: Slide up do ícone e fade in do nome
+    await Future.wait([
+      _slideController.forward(),
+      _nameFadeController.forward(),
+    ]);
     await Future.delayed(const Duration(milliseconds: 800));
     
-    // Transição para fase 3: Mostrar tela final
+    // Transição para fase 3: Fade out da fase 2 e mostrar tela final
+    await _nameFadeController.reverse();
     setState(() {
       _currentPhase = 3;
     });
@@ -92,6 +113,7 @@ class _SplashScreenState extends State<SplashScreen>
   void dispose() {
     _fadeController.dispose();
     _slideController.dispose();
+    _nameFadeController.dispose();
     super.dispose();
   }
   
@@ -163,32 +185,52 @@ class _SplashScreenState extends State<SplashScreen>
     }
   }
   
-  // Fase 1: Nome "Kapiwara" com fade in
+  // Fase 1: Nome "Kapiwara" com fade in posicionado mais abaixo
   Widget _buildPhase1() {
-    return Center(
-      child: FadeTransition(
-        opacity: _fadeAnimation,
-        child: const AnimatedLogo(
-          assetPath: 'assets/images/splash_screen/kapiwara_name.svg',
-          width: 250,
-          height: 120,
-          isSvg: true,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        FadeTransition(
+          opacity: _fadeAnimation,
+          child: const AnimatedLogo(
+            assetPath: 'assets/images/splash_screen/kapiwara_name.svg',
+            width: 250,
+            height: 120,
+            isSvg: true,
+          ),
         ),
-      ),
+        const SizedBox(height: 300), // Espaçamento da parte inferior da tela
+      ],
     );
   }
   
-  // Fase 2: Ícone da capivara com slide up
+  // Fase 2: Ícone da capivara 100px acima do nome
   Widget _buildPhase2() {
-    return Center(
-      child: SlideTransition(
-        position: _slideAnimation,
-        child: const AnimatedLogo(
-          assetPath: 'assets/images/splash_screen/kapiwara_icon.png',
-          width: 300,
-          height: 350,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        // Ícone da capivara com slide up, 100px acima do nome
+        SlideTransition(
+          position: _slideAnimation,
+          child: const AnimatedLogo(
+            assetPath: 'assets/images/splash_screen/kapiwara_icon.png',
+            width: 300,
+            height: 350,
+          ),
         ),
-      ),
+        const SizedBox(height: 10), // 100px de espaçamento entre ícone e nome
+        // Nome "Kapiwara" mantido na posição inferior
+        FadeTransition(
+          opacity: _nameFadeAnimation,
+          child: const AnimatedLogo(
+            assetPath: 'assets/images/splash_screen/kapiwara_name.svg',
+            width: 250,
+            height: 120,
+            isSvg: true,
+          ),
+        ),
+        const SizedBox(height: 300), // Espaçamento da parte inferior da tela
+      ],
     );
   }
   

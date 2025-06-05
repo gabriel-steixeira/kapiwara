@@ -22,6 +22,18 @@ class AppTheme {
   static const Color primaryButton = Color(0xFF73C086);
   static const Color primaryButtonShadow = Color(0xFF347F43);
   
+  // Cores da home screen
+  static const Color homeClimateCard = Color(0xFF73C086);
+  static const Color homeAmbientalCard = Color(0xFFE85A5A);
+  static const Color homeBiologicalCard = Color(0xFF345995);
+  static const Color homeBottomMenu = Color(0xFF262626);
+  static const Color homeSelectedIconStart = Color(0xFF345995);
+  static const Color homeSelectedIconEnd = Color(0xFF3AAEF8);
+  static const Color homeUnselectedIcon = Color(0xFFADAFC0);
+  static const Color homeMicrophoneIcon = Color(0xFFF1F1F1);
+  static const Color homeMicrophoneGradientStart = Color(0xFFE85A5A);
+  static const Color homeMicrophoneGradientEnd = Color(0xFF73C086);
+  
   // Cores com opacidade
   static Color get textSecondary => textPrimary.withValues(alpha: 0.6);
   

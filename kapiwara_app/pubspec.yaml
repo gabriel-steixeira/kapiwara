@@ -132,6 +132,8 @@ flutter:
     - assets/images/
     - assets/images/splash_screen/
     - assets/images/language_choose_screen/
+    - assets/images/config_name_screen/
+    - assets/images/home_screen/
   
   # Fonts
   fonts:
