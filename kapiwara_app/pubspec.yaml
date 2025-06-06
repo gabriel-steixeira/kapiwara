@@ -134,6 +134,8 @@ flutter:
     - assets/images/language_choose_screen/
     - assets/images/config_name_screen/
     - assets/images/home_screen/
+    - assets/images/chat_voice_screen/
+    - assets/images/emergency_contacts_screen/
   
   # Fonts
   fonts:

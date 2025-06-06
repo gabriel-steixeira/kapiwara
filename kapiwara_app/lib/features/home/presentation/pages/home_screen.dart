@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../shared/themes/app_theme.dart';
 import '../../../../shared/widgets/bottom_navigation_menu.dart';
+import '../../../emergency_contacts/presentation/pages/emergency_contacts_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,18 +51,20 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
       case 3:
         // Emergency
-        print('Navegando para Emergência');
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const EmergencyContactsPage()),
+        );
         break;
     }
   }
 
-  void _onMicrophoneTapped() {
-    print('Microfone pressionado');
-    // Aqui você pode adicionar a funcionalidade do microfone
-  }
-
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isSmallScreen = screenWidth < 400;
+    final isTablet = screenWidth > 600;
+    
     return Scaffold(
       backgroundColor: AppTheme.languageScreenBackground,
       body: SafeArea(
@@ -69,11 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Conteúdo principal
             Column(
-              
               children: [
                 // Header com avatar e notificação
                 Padding(
-                  padding: const EdgeInsets.all(32),
+                  padding: EdgeInsets.all(isSmallScreen ? 20 : 32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -81,19 +83,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Avatar
+                          // Avatar responsivo
                           Container(
-                            width: 64,
-                            height: 64,
+                            width: isSmallScreen ? 56 : 64,
+                            height: isSmallScreen ? 56 : 64,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(24),
-                              /*border: Border.all(
-                                color: AppTheme.languageCardBorder,
-                                width: 2,
-                              ),*/
+                              borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                             ),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(22),
+                              borderRadius: BorderRadius.circular(isSmallScreen ? 18 : 22),
                               child: Image.asset(
                                 'assets/images/home_screen/avatar.png',
                                 fit: BoxFit.cover,
@@ -101,37 +99,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           
-                          // Ícone de notificação
+                          // Ícone de notificação responsivo
                           Container(
-                            width: 52,
-                            height: 52,
+                            width: isSmallScreen ? 44 : 52,
+                            height: isSmallScreen ? 44 : 52,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                               color: Colors.transparent,
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     color: Colors.black.withValues(alpha: 0.1),
-                              //     blurRadius: 8,
-                              //     offset: const Offset(0, 2),
-                              //   ),
-                              // ],
                             ),
                             child: Stack(
                               children: [
                                 Center(
                                   child: SvgPicture.asset(
                                     'assets/images/home_screen/alert_icon.svg',
-                                    width: 32,
-                                    height: 32,
+                                    width: isSmallScreen ? 28 : 32,
+                                    height: isSmallScreen ? 28 : 32,
                                   ),
                                 ),
                                 // Ponto vermelho de notificação
                                 Positioned(
-                                  top: 4,
-                                  right: 4,
+                                  top: isSmallScreen ? 2 : 4,
+                                  right: isSmallScreen ? 2 : 4,
                                   child: Container(
-                                    width: 8,
-                                    height: 8,
+                                    width: isSmallScreen ? 6 : 8,
+                                    height: isSmallScreen ? 6 : 8,
                                     decoration: const BoxDecoration(
                                       color: AppTheme.homeAmbientalCard,
                                       shape: BoxShape.circle,
@@ -144,14 +135,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       
-                      const SizedBox(height: 24),
+                      SizedBox(height: isSmallScreen ? 16 : 24),
                       
-                      // Segunda linha: Saudação
+                      // Segunda linha: Saudação responsiva
                       Text(
                         'Anauê, $userName',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'DINNext',
-                          fontSize: 36,
+                          fontSize: isSmallScreen ? 28 : (isTablet ? 42 : 36),
                           fontWeight: FontWeight.bold,
                           color: AppTheme.textPrimary,
                         ),
@@ -160,10 +151,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 
-                // Grid de cards
+                // Grid de cards responsivo
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 40),
                     child: Column(
                       children: [
                         // Card de Clima (ocupa toda a largura)
@@ -171,11 +162,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           flex: 1,
                           child: Container(
                             width: double.infinity,
-                            margin: const EdgeInsets.only(bottom: 48),
-                            padding: const EdgeInsets.only(right: 0, top: 0, bottom: 0, left: 0),
+                            margin: EdgeInsets.only(bottom: isSmallScreen ? 24 : 48),
                             decoration: BoxDecoration(
                               color: AppTheme.homeClimateCard,
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withValues(alpha: 0.1),
@@ -188,20 +178,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: () {
                                 // Ação do card Clima
                               },
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                               child: Row(
                                 children: [
-                                  // Área do texto (20% da largura)
+                                  // Área do texto responsiva
                                   Expanded(
                                     flex: 3,
                                     child: Container(
                                       height: double.infinity,
                                       alignment: Alignment.center,
-                                      child: const Text(
+                                      child: Text(
                                         'Clima',
                                         style: TextStyle(
                                           fontFamily: 'DINNext',
-                                          fontSize: 24,
+                                          fontSize: isSmallScreen ? 20 : 24,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
@@ -209,23 +199,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   
-                                  // Área da imagem (80% da largura)
+                                  // Área da imagem responsiva
                                   Expanded(
                                     flex: 7,
                                     child: Container(
                                       height: double.infinity,
-                                      margin: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.1, top: 0, bottom: 0, left: 0), // 10% de margem à direita
-                                      padding: EdgeInsets.only(right: 0, top: 0, bottom: 0, left: 0),
-                                      decoration: const BoxDecoration(
+                                      margin: EdgeInsets.only(
+                                        right: screenWidth * 0.1,
+                                      ),
+                                      decoration: BoxDecoration(
                                         borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(24),
-                                          bottomRight: Radius.circular(24),
+                                          topRight: Radius.circular(isSmallScreen ? 20 : 24),
+                                          bottomRight: Radius.circular(isSmallScreen ? 20 : 24),
                                         ),
                                       ),
                                       child: ClipRRect(
-                                        borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(24),
-                                          bottomRight: Radius.circular(24),
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(isSmallScreen ? 20 : 24),
+                                          bottomRight: Radius.circular(isSmallScreen ? 20 : 24),
                                         ),
                                         child: Image.asset(
                                           'assets/images/home_screen/rain_image.png',
@@ -242,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         
-                        // Cards inferiores (Ambiental e Biológico)
+                        // Cards inferiores (Ambiental e Biológico) responsivos
                         Expanded(
                           flex: 1,
                           child: Row(
@@ -250,10 +241,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               // Card Ambiental
                               Expanded(
                                 child: Container(
-                                  margin: const EdgeInsets.only(right: 16),
+                                  margin: EdgeInsets.only(right: isSmallScreen ? 8 : 16),
                                   decoration: BoxDecoration(
                                     color: AppTheme.homeAmbientalCard,
-                                    borderRadius: BorderRadius.circular(24),
+                                    borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black.withValues(alpha: 0.1),
@@ -266,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     onTap: () {
                                       // Ação do card Ambiental
                                     },
-                                    borderRadius: BorderRadius.circular(24),
+                                    borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                                     child: Stack(
                                       children: [
                                         // Imagem da floresta no fundo
@@ -275,9 +266,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           left: 0,
                                           right: 0,
                                           child: ClipRRect(
-                                            borderRadius: const BorderRadius.only(
-                                              bottomLeft: Radius.circular(24),
-                                              bottomRight: Radius.circular(24),
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(isSmallScreen ? 20 : 24),
+                                              bottomRight: Radius.circular(isSmallScreen ? 20 : 24),
                                             ),
                                             child: Image.asset(
                                               'assets/images/home_screen/forest.png',
@@ -287,15 +278,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                         
-                                        // Texto "Ambiental" sobreposto
-                                        const Positioned(
-                                          top: 16,
-                                          left: 16,
+                                        // Texto "Ambiental" sobreposto responsivo
+                                        Positioned(
+                                          top: isSmallScreen ? 12 : 16,
+                                          left: isSmallScreen ? 12 : 16,
                                           child: Text(
                                             'Ambiental',
                                             style: TextStyle(
                                               fontFamily: 'DINNext',
-                                              fontSize: 24,
+                                              fontSize: isSmallScreen ? 18 : 24,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
                                             ),
@@ -310,10 +301,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               // Card Biológico
                               Expanded(
                                 child: Container(
-                                  margin: const EdgeInsets.only(left: 16),
+                                  margin: EdgeInsets.only(left: isSmallScreen ? 8 : 16),
                                   decoration: BoxDecoration(
                                     color: AppTheme.homeBiologicalCard,
-                                    borderRadius: BorderRadius.circular(24),
+                                    borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black.withValues(alpha: 0.1),
@@ -326,29 +317,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                     onTap: () {
                                       // Ação do card Biológico
                                     },
-                                    borderRadius: BorderRadius.circular(24),
+                                    borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        // Texto "Biológico"
-                                        const Padding(
-                                          padding: EdgeInsets.all(16),
+                                        // Texto "Biológico" responsivo
+                                        Padding(
+                                          padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
                                           child: Text(
                                             'Biológico',
                                             style: TextStyle(
                                               fontFamily: 'DINNext',
-                                              fontSize: 24,
+                                              fontSize: isSmallScreen ? 18 : 24,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
                                             ),
                                           ),
                                         ),
                                         
-                                        // Imagem da saúde
+                                        // Imagem da saúde responsiva
                                         Expanded(
                                           child: Container(
                                             width: double.infinity,
-                                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: isSmallScreen ? 16 : 24,
+                                            ),
                                             child: Center(
                                               child: Image.asset(
                                                 'assets/images/home_screen/health.png',
@@ -359,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                         
-                                        const SizedBox(height: 16),
+                                        SizedBox(height: isSmallScreen ? 12 : 16),
                                       ],
                                     ),
                                   ),
@@ -373,8 +366,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 
-                // Espaçamento para o bottom menu
-                const SizedBox(height: 150),
+                // Espaçamento para o bottom menu responsivo
+                SizedBox(height: isSmallScreen ? 120 : 150),
               ],
             ),
             
@@ -382,7 +375,6 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationMenu(
               selectedIndex: selectedIndex,
               onItemTapped: _onItemTapped,
-              onMicrophoneTapped: _onMicrophoneTapped,
             ),
           ],
         ),

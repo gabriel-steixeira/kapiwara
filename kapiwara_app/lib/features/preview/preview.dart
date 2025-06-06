@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kapiwara_app/features/emergency_contacts/presentation/pages/emergency_contacts_page.dart';
 import 'package:kapiwara_app/features/name_configuration/presentation/pages/name_configuration_screen.dart';
 import 'package:kapiwara_app/features/splash/presentation/pages/splash_screen.dart';
 import 'package:kapiwara_app/features/home/presentation/pages/home_screen.dart';
+import 'package:kapiwara_app/features/chat_voice/presentation/pages/chat_voice_page.dart';
 
-void main() {
+void main() { 
   runApp(const Preview());
 }
 
@@ -15,7 +17,7 @@ class Preview extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: ChatVoicePage(),
     );
   }
 } 
