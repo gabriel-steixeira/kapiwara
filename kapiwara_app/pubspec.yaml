@@ -136,7 +136,9 @@ flutter:
     - assets/images/home_screen/
     - assets/images/chat_voice_screen/
     - assets/images/emergency_contacts_screen/
-  
+    - assets/images/weather_screen/
+    - assets/images/community_screen/
+    
   # Fonts
   fonts:
     - family: DINNext

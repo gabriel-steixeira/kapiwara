@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../shared/themes/app_theme.dart';
 import '../../../../shared/widgets/bottom_navigation_menu.dart';
-import '../../../emergency_contacts/presentation/pages/emergency_contacts_page.dart';
+import '../../../weather/presentation/pages/weather_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,33 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       userName = savedName;
     });
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-    
-    // Aqui você pode adicionar navegação para outras telas
-    switch (index) {
-      case 0:
-        // Home - já estamos aqui
-        break;
-      case 1:
-        // Map
-        print('Navegando para Mapa');
-        break;
-      case 2:
-        // People
-        print('Navegando para Pessoas');
-        break;
-      case 3:
-        // Emergency
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const EmergencyContactsPage()),
-        );
-        break;
-    }
   }
 
   @override
@@ -176,7 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                // Ação do card Clima
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) => const WeatherScreen()),
+                                );
                               },
                               borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                               child: Row(
@@ -368,14 +343,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 
                 // Espaçamento para o bottom menu responsivo
                 SizedBox(height: isSmallScreen ? 120 : 150),
+                
+                // Bottom Navigation Menu Component
+                BottomNavigationMenu(
+                  selectedIndex: selectedIndex,
+                ),
               ],
             ),
             
-            // Bottom Navigation Menu Component
-            BottomNavigationMenu(
-              selectedIndex: selectedIndex,
-              onItemTapped: _onItemTapped,
-            ),
           ],
         ),
       ),

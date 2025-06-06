@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/emergency_contact_entity.dart';
 import '../widgets/emergency_contact_card.dart';
 import '../../../../shared/widgets/bottom_navigation_menu.dart';
-import '../../../home/presentation/pages/home_screen.dart';
 
 class EmergencyContactsPage extends StatefulWidget {
   const EmergencyContactsPage({Key? key}) : super(key: key);
@@ -38,33 +37,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
     ),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-    
-    // Aqui você pode adicionar navegação para outras telas
-    switch (index) {
-      case 0:
-        // Home
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
-        break;
-      case 1:
-        // Map
-        print('Navegando para Mapa');
-        break;
-      case 2:
-        // People
-        print('Navegando para Pessoas');
-        break;
-      case 3:
-        // Emergency - já estamos aqui
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -96,7 +68,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
                             style: TextStyle(
                               fontFamily: 'DINNext',
                               fontWeight: FontWeight.w700,
-                              fontSize: isSmallScreen ? 26 : (isTablet ? 40 : 34),
+                              fontSize: isSmallScreen ? 30 : (isTablet ? 40 : 34),
                               color: const Color(0xFF444444),
                               letterSpacing: 0.32,
                             ),
@@ -119,7 +91,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
                 Expanded(
                   child: ListView.builder(
                     padding: EdgeInsets.only(
-                      top: isSmallScreen ? 16 : 24,
+                      top: 0,
                       bottom: isSmallScreen ? 120 : 150,
                     ),
                     itemCount: contatos.length,
@@ -137,14 +109,12 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
                     },
                   ),
                 ),
+                // Bottom Navigation Menu Component
+                BottomNavigationMenu(
+                  selectedIndex: selectedIndex,
+                ),
               ],
-            ),
-            
-            // Bottom Navigation Menu Component
-            BottomNavigationMenu(
-              selectedIndex: selectedIndex,
-              onItemTapped: _onItemTapped,
-            ),
+            ),            
           ],
         ),
       ),
