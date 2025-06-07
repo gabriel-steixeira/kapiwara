@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../shared/themes/app_theme.dart';
 import '../../../../shared/widgets/bottom_navigation_menu.dart';
+import '../../../alerts/presentation/pages/alerts_screen.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
@@ -18,31 +19,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
   int likesPost1 = 23;
   int likesPost2 = 23;
   bool isAldeiaSelected = false; // Estado para controlar Feed/Aldeia
-
-  void _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-    
-    switch (index) {
-      case 0:
-        Navigator.pop(context); // Voltar para Home
-        break;
-      case 1:
-        print('Navegando para Mapa');
-        break;
-      case 2:
-        // Community - já estamos aqui
-        break;
-      case 3:
-        print('Navegando para Emergência');
-        break;
-    }
-  }
-
-  void _onMicrophoneTapped() {
-    print('Microfone pressionado');
-  }
 
   void _toggleLike(int postIndex) {
     setState(() {
@@ -89,10 +65,17 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           ),
                           
                           // Ícone de notificação
-                          SvgPicture.asset(
-                            'assets/images/community_screen/notification_red.svg',
-                            width: 40,
-                            height: 40,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) => const AlertsScreen()),
+                              );
+                            },
+                            child: SvgPicture.asset(
+                              'assets/images/community_screen/notification_red.svg',
+                              width: 40,
+                              height: 40,
+                            ),
                           ),
                         ],
                       ),
@@ -218,7 +201,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                         ],
                       ),
                       
-                      const SizedBox(height: 15),
+                      //const SizedBox(height: 15),
                     ],
                   ),
                 ),
@@ -245,7 +228,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         children: [
-          const SizedBox(height: 8),
+          //const SizedBox(height: 8),
           
           // Botão "COMPARTILHAR COM A COMUNIDADE" - apenas no Feed
           Container(
@@ -270,7 +253,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  print('Compartilhar com a comunidade');
+                  // Implementar funcionalidade de compartilhamento
                 },
                 borderRadius: BorderRadius.circular(12),
                 child: Row(
@@ -648,7 +631,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
           
           // Espaçamento para o bottom menu
-          const SizedBox(height: 150),
+          //const SizedBox(height: 150),
         ],
       ),
     );

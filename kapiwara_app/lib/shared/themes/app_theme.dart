@@ -34,6 +34,25 @@ class AppTheme {
   static const Color homeMicrophoneGradientStart = Color(0xFFE85A5A);
   static const Color homeMicrophoneGradientEnd = Color(0xFF73C086);
   
+  // Cores do tema escuro (weather e alerts)
+  static const Color darkThemeBackground = Color(0xFF040C13);
+  static const Color darkThemeCardBackground = Color(0xFF2A2A2A);
+  static const Color darkThemeContainerBackground = Color(0xFF1A1A1A);
+  static const Color darkThemeTextPrimary = Colors.white;
+  static const Color darkThemeTextSecondary = Color(0xFFB3B3B3);
+  static const Color darkThemeTextTertiary = Color(0xFF999999);
+  
+  // Cores da tela de alertas
+  static const Color alertsLightBackground = languageScreenBackground;
+  static const Color alertsLightContainer = Color(0xCCFFEDD3); // 80% opacidade
+  static const Color alertsLightCardBackground = Color(0xFFE9E0D5);
+  static const Color alertsLightTitle = Color(0xFF262626);
+  
+  static const Color alertsDarkBackground = darkThemeBackground;
+  static const Color alertsDarkContainer = Color(0xCC1A1A1A); // 80% opacidade
+  static const Color alertsDarkCardBackground = darkThemeCardBackground;
+  static const Color alertsDarkTitle = darkThemeTextPrimary;
+  
   // Cores com opacidade
   static Color get textSecondary => textPrimary.withValues(alpha: 0.6);
   

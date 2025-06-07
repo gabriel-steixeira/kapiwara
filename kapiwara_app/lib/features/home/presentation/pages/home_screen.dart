@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../shared/themes/app_theme.dart';
 import '../../../../shared/widgets/bottom_navigation_menu.dart';
 import '../../../weather/presentation/pages/weather_screen.dart';
+import '../../../alerts/presentation/pages/alerts_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -80,29 +81,37 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                               color: Colors.transparent,
                             ),
-                            child: Stack(
-                              children: [
-                                Center(
-                                  child: SvgPicture.asset(
-                                    'assets/images/home_screen/alert_icon.svg',
-                                    width: isSmallScreen ? 28 : 32,
-                                    height: isSmallScreen ? 28 : 32,
-                                  ),
-                                ),
-                                // Ponto vermelho de notificação
-                                Positioned(
-                                  top: isSmallScreen ? 2 : 4,
-                                  right: isSmallScreen ? 2 : 4,
-                                  child: Container(
-                                    width: isSmallScreen ? 6 : 8,
-                                    height: isSmallScreen ? 6 : 8,
-                                    decoration: const BoxDecoration(
-                                      color: AppTheme.homeAmbientalCard,
-                                      shape: BoxShape.circle,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) => const AlertsScreen()),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: SvgPicture.asset(
+                                      'assets/images/home_screen/alert_icon.svg',
+                                      width: isSmallScreen ? 28 : 32,
+                                      height: isSmallScreen ? 28 : 32,
                                     ),
                                   ),
-                                ),
-                              ],
+                                  // Ponto vermelho de notificação
+                                  Positioned(
+                                    top: isSmallScreen ? 2 : 4,
+                                    right: isSmallScreen ? 2 : 4,
+                                    child: Container(
+                                      width: isSmallScreen ? 6 : 8,
+                                      height: isSmallScreen ? 6 : 8,
+                                      decoration: const BoxDecoration(
+                                        color: AppTheme.homeAmbientalCard,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],

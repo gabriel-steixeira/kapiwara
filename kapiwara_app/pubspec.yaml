@@ -83,6 +83,9 @@ dev_dependencies:
   # Testing
   bloc_test: ^9.1.7
   mocktail: ^1.0.4
+  
+  # App Icon Generator
+  flutter_launcher_icons: ^0.14.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -138,6 +141,7 @@ flutter:
     - assets/images/emergency_contacts_screen/
     - assets/images/weather_screen/
     - assets/images/community_screen/
+    - assets/images/alerts_screen/
     
   # Fonts
   fonts:
@@ -146,4 +150,23 @@ flutter:
         - asset: assets/fonts/din_next_regular.otf
         - asset: assets/fonts/din_next_bold.otf
           weight: 700
+
+# Flutter Launcher Icons Configuration
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/kapiwara_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images/kapiwara_icon.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/images/kapiwara_icon.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/images/kapiwara_icon.png"
   

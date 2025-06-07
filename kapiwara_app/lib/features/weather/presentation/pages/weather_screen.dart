@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../shared/themes/app_theme.dart';
 import '../../../../shared/widgets/bottom_navigation_menu.dart';
+import '../../../alerts/presentation/pages/alerts_screen.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -36,7 +37,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     final isDayTime = _isDayTime();
     
     return Scaffold(
-      backgroundColor: isDayTime ? const Color(0xFF715848) : const Color(0xFF040C13),
+      backgroundColor: isDayTime ? AppTheme.alertsLightBackground : AppTheme.alertsDarkBackground,
       body: SafeArea(
         child: Stack(
           children: [
@@ -48,7 +49,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   flex: 1,
                   child: Container(
                     width: double.infinity,
-                    color: isDayTime ? const Color(0xFF715848) : const Color(0xFF040C13),
+                    color: isDayTime ? AppTheme.alertsLightBackground : AppTheme.alertsDarkBackground,
                   ),
                 ),
                 
@@ -57,7 +58,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   flex: 1,
                   child: Container(
                     width: double.infinity,
-                    color: isDayTime ? const Color(0xFF715848) : const Color(0xFF040C13),
+                    color: isDayTime ? AppTheme.alertsLightBackground : AppTheme.alertsDarkBackground,
                     padding: EdgeInsets.only(
                       top: isSmallScreen ? 50 : 32,
                       left: isSmallScreen ? 20 : 32,
@@ -143,35 +144,43 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                           color: Colors.transparent,
                         ),
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: SvgPicture.asset(
-                                'assets/images/home_screen/alert_icon.svg',
-                                width: isSmallScreen ? 28 : 32,
-                                height: isSmallScreen ? 28 : 32,
-                                colorFilter: isDayTime 
-                                    ? null // Cor original durante o dia
-                                    : const ColorFilter.mode(
-                                        Colors.white,
-                                        BlendMode.srcIn,
-                                    ), // Cor branca durante a noite
-                              ),
-                            ),
-                            // Ponto vermelho de notificação
-                            Positioned(
-                              top: isSmallScreen ? 2 : 4,
-                              right: isSmallScreen ? 2 : 4,
-                              child: Container(
-                                width: isSmallScreen ? 6 : 8,
-                                height: isSmallScreen ? 6 : 8,
-                                decoration: const BoxDecoration(
-                                  color: AppTheme.homeAmbientalCard,
-                                  shape: BoxShape.circle,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => const AlertsScreen()),
+                            );
+                          },
+                          borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: SvgPicture.asset(
+                                  'assets/images/home_screen/alert_icon.svg',
+                                  width: isSmallScreen ? 28 : 32,
+                                  height: isSmallScreen ? 28 : 32,
+                                  colorFilter: isDayTime 
+                                      ? null // Cor original durante o dia
+                                      : const ColorFilter.mode(
+                                          Colors.white,
+                                          BlendMode.srcIn,
+                                      ), // Cor branca durante a noite
                                 ),
                               ),
-                            ),
-                          ],
+                              // Ponto vermelho de notificação
+                              Positioned(
+                                top: isSmallScreen ? 2 : 4,
+                                right: isSmallScreen ? 2 : 4,
+                                child: Container(
+                                  width: isSmallScreen ? 6 : 8,
+                                  height: isSmallScreen ? 6 : 8,
+                                  decoration: const BoxDecoration(
+                                    color: AppTheme.homeAmbientalCard,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

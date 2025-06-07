@@ -64,7 +64,7 @@ class BottomNavigationMenu extends StatelessWidget {
     final isDayTime = _isDayTime();
 
     return SizedBox(
-      height: isSmallScreen ? 120 : 140, // Altura fixa para o Stack
+      height: isSmallScreen ? 110 : 140, // Altura fixa para o Stack
       child: Stack(
         children: [
           // Bottom Menu

@@ -1,11 +1,11 @@
 {
-    "name": "kapiwara_app",
-    "short_name": "kapiwara_app",
+    "name": "Kapiwara",
+    "short_name": "Kapiwara",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FFEDD3",
+    "theme_color": "#73C086",
+    "description": "Aplicação mobile Kapiwara para comunidades indígenas",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
