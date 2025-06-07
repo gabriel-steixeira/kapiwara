@@ -91,28 +91,69 @@ O projeto utiliza **Material Design 3** com:
 
 ## 📱 Features Implementadas
 
-### Splash Screen
-- ✅ 3 animações sequenciais
-- ✅ Fade in do logo "Kapiwara"
-- ✅ Slide up do ícone da capivara
-- ✅ Tela final com "anauê"
-- ✅ Gradientes de cores personalizados
-- ✅ Navegação automática
+### ✅ Splash Screen
+- Animações sequenciais com gradientes personalizados
+- Transições suaves entre fases
+- Navegação automática para seleção de idioma
 
-### Language Selection
-- ✅ Seleção de idioma (Português/Guarani)
-- ✅ Persistência com SharedPreferences
-- ✅ Componentes reutilizáveis (LanguageCard, PrimaryButton)
-- ✅ Design system consistente
-- ✅ Validação e feedback visual
-- ✅ Estado de loading
+### ✅ Seleção de Idioma
+- Suporte a Português e Guarani
+- Persistência com SharedPreferences
+- Design responsivo com validação
 
-### Home
-- ✅ Lista de itens com BLoC
-- ✅ Pull-to-refresh
-- ✅ Estados de loading, erro e vazio
-- ✅ Cards com Material Design
-- ✅ Tratamento de erros
+### ✅ Configuração de Nome
+- Entrada personalizada do nome do usuário
+- Validação e persistência local
+- Interface responsiva
+
+### ✅ Tela Principal (Home)
+- Dashboard com saudação personalizada
+- Cards de navegação para funcionalidades principais
+- Avatar e sistema de notificações
+- Design responsivo para diferentes tamanhos de tela
+
+### ✅ Sistema de Clima
+- Tela dedicada para informações meteorológicas
+- Interface adaptativa dia/noite
+- Integração com navegação principal
+
+### ✅ Chat de Voz
+- Interface para comunicação por voz
+- Integração com microfone central da navegação
+- Design otimizado para acessibilidade
+
+### ✅ Contatos de Emergência
+- Lista de contatos importantes
+- Acesso rápido via navegação bottom
+- Interface clara e funcional
+
+### ✅ Comunidade
+- Tela para interação comunitária
+- Sistema de navegação integrado
+- Interface responsiva
+
+### ✅ Sistema de Alertas
+- Notificações visuais na home
+- Tela dedicada para alertas
+- Indicadores de status
+
+### ✅ Navegação Bottom
+- Menu inferior com 5 seções principais
+- Botão central de microfone com gradiente
+- Navegação responsiva e intuitiva
+- Estados visuais para seleção ativa
+
+### ✅ Sistema de Temas
+- Material Design 3
+- Suporte a tema claro e escuro automático
+- Paleta de cores personalizada
+- Tipografia consistente (DINNext)
+
+### ✅ Arquitetura
+- Clean Architecture implementada
+- BLoC para gerenciamento de estado
+- Injeção de dependência configurada
+- Estrutura modular por features
 
 ## 🛠️ Como Executar
 
@@ -145,35 +186,6 @@ dart run build_runner build
 flutter run
 ```
 
-## 🧪 Testes
-
-Para executar os testes:
-
-```bash
-# Todos os testes
-flutter test
-
-# Testes com coverage
-flutter test --coverage
-
-# Testes específicos
-flutter test test/features/home/
-```
-
-## 📝 Comandos Úteis
-
-### Geração de Código
-```bash
-# Gerar uma vez
-dart run build_runner build
-
-# Gerar e observar mudanças
-dart run build_runner watch
-
-# Limpar e gerar
-dart run build_runner build --delete-conflicting-outputs
-```
-
 ### Análise de Código
 ```bash
 # Análise estática
@@ -203,14 +215,6 @@ flutter pub outdated
 - Use `@injectable` para classes que devem ser injetadas
 - Use `@lazySingleton` para singletons
 - Configure no `injection.dart`
-
-## 🔧 Configuração da API
-
-Edite o arquivo `lib/core/constants/app_constants.dart`:
-
-```dart
-static const String baseUrl = 'https://sua-api.com';
-```
 
 ## 👥 Colaboradores
 
